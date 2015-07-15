@@ -23,6 +23,10 @@ app.delete('/note/:id', function(req, res) {
   handlers.del(req, res);
 });
 
+app.patch('/note/:id', function(req, res) {
+  handlers.patch(req, res);
+});
+
 app.listen(3000, function() {
   console.log('server running');
 });
