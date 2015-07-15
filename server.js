@@ -33,7 +33,6 @@ app.post('/note', function(req, res, next) {
       console.log(err);
       res.status(err.status).end();
     } else {
-      console.log(files);
       numFiles = files.length;
       fs.writeFile(__dirname + '/data/note' + numFiles + '.json',
         JSON.stringify(req.body), function(err) {
@@ -67,7 +66,7 @@ app.delete('/note/:id', function(req, res) {
       res.status(err.status).end();
     }
   });
-  res.send('Deleted:' + req.params.id);
+  console.log('Deleted:' + req.params.id);
 });
 
 app.listen(3000, function() {
