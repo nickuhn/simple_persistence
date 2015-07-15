@@ -1,0 +1,43 @@
+{
+  "name": "simple_persistence",
+  "version": "0.1.0",
+  "description": "Simple HTTP server that stores data in a folder",
+  "main": "server.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "gulp",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nickuhn/simple_persistence.git"
+  },
+  "keywords": [
+    "Node",
+    "Server",
+    "Data",
+    "Storage"
+  ],
+  "author": "Nick Kuhn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nickuhn/simple_persistence/issues"
+  },
+  "homepage": "https://github.com/nickuhn/simple_persistence#readme",
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "chai-http": "^1.0.0",
+    "gulp": "^3.9.0",
+    "gulp-jscs": "^1.6.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-mocha": "^2.1.3",
+    "jshint-stylish": "^2.0.1",
+    "mocha": "^2.2.5"
+  },
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1"
+  }
+}
