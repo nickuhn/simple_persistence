@@ -2,10 +2,20 @@ var expect = require('chai').expect;
 var server = require('../server');
 var chai = require('chai');
 var chaiHttp = require('chai-http');
+var fs = require('fs');
 
 chai.use(chaiHttp);
 
 describe('server', function() {
+  before(function(done) {
+    fs.writeFile(__dirname + '/../data/test.json',
+      {content: "testing text."}, function(err) {
+      if (err) {
+        console.log(err);
+      }
+      done();
+    });
+  });
   it('should store a reminder', function(done) {
     chai.request('localhost:3000')
       .post('/note')
@@ -18,7 +28,7 @@ describe('server', function() {
   });
   it('should overwrite a stored reminder', function(done) {
     chai.request('localhost:3000')
-      .put('/note/note2')
+      .put('/note/test')
       .send({author: 'Judge', text: 'Overruled!'})
       .end(function(err, res) {
         expect(err).to.be.null;
@@ -31,7 +41,7 @@ describe('server', function() {
       chai.request('localhost:3000').post('/note');
     });
     chai.request('localhost:3000')
-      .delete('/note/note3')
+      .delete('/note/note2')
       .end(function(err, res) {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
@@ -40,7 +50,7 @@ describe('server', function() {
   });
   it('should retrieve a stored reminder', function(done) {
     chai.request('localhost:3000')
-      .get('/note/note1')
+      .get('/note/test')
       .end(function(err, res) {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
@@ -50,12 +60,20 @@ describe('server', function() {
   });
   it('should overwrite a portion of a stored reminder', function(done) {
     chai.request('localhost:3000')
-      .patch('/note/note2')
+      .patch('/note/test')
       .send({text: 'Sustained!'})
       .end(function(err, res) {
         expect(err).to.be.null;
         expect(res).to.have.status(200);
         done();
       });
+  });
+  after(function(done) {
+    fs.unlink(__dirname + '/../data/test.json', function(err) {
+      if (err) {
+        console.log(err);
+      }
+      done();
+    });
   });
 });
